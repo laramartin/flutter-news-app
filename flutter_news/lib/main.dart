@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/Article.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-         primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -25,6 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Article> _articles = articles;
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          children: <Widget>[
-            Text(
-              'hello'
-            )
-          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: _articles.map((article) => Text(article.text)).toList(),
         ),
       ),
     );
