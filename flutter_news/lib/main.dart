@@ -42,16 +42,25 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildItem(Article article) {
     return Padding(
       padding: EdgeInsets.all(padding),
-      child: ListTile(
+      child: ExpansionTile(
         title: Text(article.text),
-        subtitle: Text(article.domain),
-        selected: false,
-        onTap: () async {
-          var url = "http://${article.domain}";
-          if (await canLaunch(url)) {
-            launch(url);
-          }
-        },
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Text("by ${article.by}"),
+              IconButton(
+                icon: Icon(Icons.open_in_browser),
+                onPressed: () async {
+                  var url = "http://${article.domain}";
+                  if (await canLaunch(url)) {
+                    launch(url);
+                  }
+                },
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
