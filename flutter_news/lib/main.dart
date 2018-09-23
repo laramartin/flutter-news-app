@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_news/article.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,8 +35,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: _articles.map(_buildItem).toList(),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 1));
+        },
+        child: ListView(
+          children: _articles.map(_buildItem).toList(),
+        ),
       ),
     );
   }
