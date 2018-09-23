@@ -16,16 +16,72 @@ class Article {
 
 final articles = [
   new Article(
-      text: "this is the first sample text",
-      domain: "bla.com",
+      text: "this is a sample text",
+      domain: "www.google.com",
       by: "me",
       age: "30",
       score: 1,
       commentsCount: 2
   ),
   new Article(
-      text: "this is a second sample text",
-      domain: "bla.com",
+      text: "this is a sample text",
+      domain: "www.google.com",
+      by: "me",
+      age: "30",
+      score: 1,
+      commentsCount: 2
+  ),
+  new Article(
+      text: "this is a sample text",
+      domain: "www.google.com",
+      by: "me",
+      age: "30",
+      score: 1,
+      commentsCount: 2
+  ),
+  new Article(
+      text: "this is a sample text",
+      domain: "www.google.com",
+      by: "me",
+      age: "30",
+      score: 1,
+      commentsCount: 2
+  ),
+  new Article(
+      text: "this is a sample text",
+      domain: "www.google.com",
+      by: "me",
+      age: "30",
+      score: 1,
+      commentsCount: 2
+  ),
+  new Article(
+      text: "this is a sample text",
+      domain: "www.google.com",
+      by: "me",
+      age: "30",
+      score: 1,
+      commentsCount: 2
+  ),
+  new Article(
+      text: "this is a sample text",
+      domain: "www.google.com",
+      by: "me",
+      age: "30",
+      score: 1,
+      commentsCount: 2
+  ),
+  new Article(
+      text: "this is a sample text",
+      domain: "www.google.com",
+      by: "me",
+      age: "30",
+      score: 1,
+      commentsCount: 2
+  ),
+  new Article(
+      text: "this is a sample text",
+      domain: "www.google.com",
       by: "me",
       age: "30",
       score: 1,

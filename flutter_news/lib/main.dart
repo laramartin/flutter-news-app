@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news/Article.dart';
+import 'package:flutter_news/article.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +25,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Article> _articles = articles;
+  final padding = 16.0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +41,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildItem(Article article) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(padding),
       child: ListTile(
         title: Text(article.text),
         subtitle: Text(article.domain),
+        selected: false,
+        onTap: () async {
+          var url = "http://${article.domain}";
+          if (await canLaunch(url)) {
+            launch(url);
+          }
+        },
       ),
     );
   }
