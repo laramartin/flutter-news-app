@@ -8,9 +8,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -34,11 +31,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _articles.map((article) => Text(article.text)).toList(),
-        ),
+      body: ListView(
+        children: _articles.map(_buildItem).toList(),
+      ),
+    );
+  }
+
+  Widget _buildItem(Article article) {
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: ListTile(
+        title: Text(article.text),
+        subtitle: Text(article.domain),
       ),
     );
   }
