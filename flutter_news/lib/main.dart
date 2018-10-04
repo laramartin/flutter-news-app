@@ -26,8 +26,74 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Article> _articles = articles;
+//  List<Article> _articles = articles;
   final padding = 16.0;
+
+  List<Article> _articles = [
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+    new Article(
+      text: "this is a sample text",
+      url: "www.google.com",
+      by: "me",
+      time: 1210981217,
+      score: 1,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {

@@ -1,92 +1,43 @@
-class Article {
-  final String text;
-  final String url;
-  final String by;
-  final int time;
-  final int score;
+import 'package:built_value/built_value.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/serializer.dart';
 
-  const Article({this.text,
-    this.url,
-    this.by,
-    this.time,
-    this.score});
+part 'article.g.dart';
 
-  factory Article.fromJson(Map<String, dynamic> json) {
-    if (json == null) {
-      return null;
-    }
-    return Article(
-        text: json['text'] ?? 'null',
-        url: json['url'] ?? 'null',
-        by: json['by'],
-        time: json['time'] ?? 0,
-        score: json['score'] ?? 0,
-    );
-  }
+abstract class Article implements Built<Article, ArticleBuilder> {
+
+  static Serializer<Article> get serializer => _$articleSerializer;
+
+  int get id;
+
+  bool get deleted;
+
+  String get type;
+
+  String get by;
+
+  int get time;
+
+  String get text;
+
+  bool get dead;
+
+  String get parent;
+
+  String get poll;
+
+  BuiltList<int> get kids;
+
+  String get url;
+
+  int get score;
+
+  String get title;
+
+  BuiltList<int> get parts;
+
+  int get descendants;
+
+  Article._();
+  factory Article([updates(ArticleBuilder b)]) = _$Article;
 }
-
-final articles = [
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-  new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-  ),
-];
