@@ -1,90 +1,92 @@
 class Article {
   final String text;
-  final String domain;
+  final String url;
   final String by;
-  final String age;
+  final int time;
   final int score;
-  final int commentsCount;
 
   const Article({this.text,
-    this.domain,
+    this.url,
     this.by,
-    this.age,
-    this.score,
-    this.commentsCount});
+    this.time,
+    this.score});
+
+  factory Article.fromJson(Map<String, dynamic> json) {
+    if (json == null) {
+      return null;
+    }
+    return Article(
+        text: json['text'] ?? 'null',
+        url: json['url'] ?? 'null',
+        by: json['by'],
+        time: json['time'] ?? 0,
+        score: json['score'] ?? 0,
+    );
+  }
 }
 
 final articles = [
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
   new Article(
       text: "this is a sample text",
-      domain: "www.google.com",
+      url: "www.google.com",
       by: "me",
-      age: "30",
+      time: 1210981217,
       score: 1,
-      commentsCount: 2
   ),
 ];

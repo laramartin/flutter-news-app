@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton(
                 icon: Icon(Icons.open_in_browser),
                 onPressed: () async {
-                  var url = "http://${article.domain}";
+                  var url = "http://${article.url}";
                   if (await canLaunch(url)) {
                     launch(url);
                   }
