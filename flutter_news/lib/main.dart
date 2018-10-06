@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         AsyncSnapshot<Article> snapshot) {
                       if (snapshot.connectionState == ConnectionState.done &&
                           snapshot.hasData) {
-                        return Text(snapshot.data.title);
+                        return _buildItem(snapshot.data);
                       } else {
                         return Text("something failed");
                       }
@@ -83,18 +83,20 @@ class _MyHomePageState extends State<MyHomePage> {
     return Padding(
       padding: EdgeInsets.all(padding),
       child: ExpansionTile(
-        title: Text(article.text),
+        title: Text(article.title),
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text("by ${article.by}"),
+              Text(article.type),
               IconButton(
                 icon: Icon(Icons.open_in_browser),
                 onPressed: () async {
-                  var url = "http://${article.url}";
-                  if (await canLaunch(url)) {
-                    launch(url);
+                  final url = article.url;
+                  if (url != null) {
+                    if (await canLaunch(url)) {
+                      launch(url);
+                    }
                   }
                 },
               )
