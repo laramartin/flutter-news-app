@@ -1,5 +1,7 @@
 import 'package:flutter_news/json_parser.dart';
 import 'package:test/test.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   test("parses topstories.json", () {
@@ -19,7 +21,17 @@ void main() {
       "time" : 1314211127,
       "type" : "comment"
     }""";
-
     expect(parseArticle(jsonString).id, 2921983);
   });
+
+//  test("parses item.json fetched from API", () async {
+//    final url = "https://hacker-news.firebaseio.com/v0/topstories.json";
+//    final response = await http.get(url);
+//    if (response.statusCode == 2000) {
+//      final ids = json.decode(response.body);
+//      if (ids.isNotEmpty) {
+//
+//      }
+//    }
+//  });
 }

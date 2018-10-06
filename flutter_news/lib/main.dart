@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_news/json_parser.dart';
 import 'package:flutter_news/src/article.dart';
+import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(MyApp());
@@ -26,74 +28,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-//  List<Article> _articles = articles;
-  final padding = 16.0;
-
-  List<Article> _articles = [
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
-    new Article(
-      text: "this is a sample text",
-      url: "www.google.com",
-      by: "me",
-      time: 1210981217,
-      score: 1,
-    ),
+  List<int> _ids = [
+    18120667,
+    18123282,
+    18122847,
+    18122824,
+    18123058,
+    18110372,
+    18123587,
+    18122442,
+    18120519,
+    18113803,
   ];
+  final padding = 16.0;
 
   @override
   Widget build(BuildContext context) {
@@ -101,15 +48,35 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 1));
-        },
-        child: ListView(
-          children: _articles.map(_buildItem).toList(),
-        ),
+      body: ListView(
+        children: _ids
+            .map(
+              (i) => FutureBuilder<Article>(
+                    future: _getArticle(i),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<Article> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done &&
+                          snapshot.hasData) {
+                        return Text(snapshot.data.title);
+                      } else {
+                        return Text("something failed");
+                      }
+                    },
+                  ),
+            )
+            .toList(),
       ),
     );
+  }
+
+  Future<Article> _getArticle(int id) async {
+    final url = "https://hacker-news.firebaseio.com/v0/item/$id.json";
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final article = parseArticle(response.body);
+      return article;
+    }
+    return null;
   }
 
   Widget _buildItem(Article article) {
