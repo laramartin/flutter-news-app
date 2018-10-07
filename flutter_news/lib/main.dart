@@ -1,25 +1,36 @@
-import 'dart:async';
+import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_news/src/json_parser.dart';
+import 'package:flutter_news/src/NewsBloc.dart';
 import 'package:flutter_news/src/article.dart';
-import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  final newsBloc = NewsBloc();
+  runApp(MyApp(bloc: newsBloc));
+}
 
 class MyApp extends StatelessWidget {
+  final NewsBloc bloc;
+
+  MyApp({Key key, this.bloc}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(
+        title: 'Flutter Demo Home Page',
+        bloc: bloc,
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  final NewsBloc bloc;
+
+  MyHomePage({Key key, this.title, this.bloc}) : super(key: key);
 
   final String title;
 
@@ -28,18 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<int> _ids = [
-    18120667,
-    18123282,
-    18122847,
-    18122824,
-    18123058,
-    18110372,
-    18123587,
-    18122442,
-    18120519,
-    18113803,
-  ];
   final padding = 16.0;
 
   @override
@@ -48,35 +47,14 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: _ids
-            .map(
-              (i) => FutureBuilder<Article>(
-                    future: _getArticle(i),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<Article> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done &&
-                          snapshot.hasData) {
-                        return _buildItem(snapshot.data);
-                      } else {
-                        return Text("something failed");
-                      }
-                    },
-                  ),
-            )
-            .toList(),
+      body: StreamBuilder<UnmodifiableListView<Article>>(
+        stream: widget.bloc.articles,
+        initialData: UnmodifiableListView<Article>([]),
+        builder: (context, snapshot) => ListView(
+              children: snapshot.data.map(_buildItem).toList(),
+            ),
       ),
     );
-  }
-
-  Future<Article> _getArticle(int id) async {
-    final url = "https://hacker-news.firebaseio.com/v0/item/$id.json";
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      final article = parseArticle(response.body);
-      return article;
-    }
-    return null;
   }
 
   Widget _buildItem(Article article) {
