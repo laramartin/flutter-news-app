@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news/src/NewsBloc.dart';
 import 'package:flutter_news/src/article.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   final newsBloc = NewsBloc();
@@ -48,7 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.white,
         leading: LoadingInfo(widget.bloc.isLoading),
       ),
       body: StreamBuilder<UnmodifiableListView<Article>>(
@@ -123,7 +123,8 @@ class LoadingInfo extends StatelessWidget {
     return StreamBuilder(
       stream: _isLoading,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (snapshot.hasData && snapshot.data) return CircularProgressIndicator();
+        if (snapshot.hasData && snapshot.data)
+          return Icon(FontAwesomeIcons.hackerNews);
         return Container();
       },
     );

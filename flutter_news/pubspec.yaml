@@ -12,6 +12,7 @@ dependencies:
   built_value: ^6.1.4
   built_collection: 4.0.0
   rxdart: ^0.18.1
+  font_awesome_flutter: ^8.0.1
 
 dev_dependencies:
   flutter_test:
