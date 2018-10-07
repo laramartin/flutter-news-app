@@ -40,6 +40,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final padding = 16.0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
             title: Text("Top stories"),
@@ -72,6 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
           } else if (index == 1) {
             widget.bloc.storiesType.add(StoriesType.newStories);
           }
+          setState(() {
+            _currentIndex = index;
+          });
         },
       ),
     );
