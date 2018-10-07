@@ -9,12 +9,15 @@ import 'package:rxdart/rxdart.dart';
 enum StoriesType { topStories, newStories }
 
 class NewsBloc {
-  final _articlesSubject = BehaviorSubject<UnmodifiableListView<Article>>();
 
   Stream<List<Article>> get articles => _articlesSubject.stream;
+  final _articlesSubject = BehaviorSubject<UnmodifiableListView<Article>>();
 
   Sink<StoriesType> get storiesType => _storiesTypeController.sink;
   final _storiesTypeController = StreamController<StoriesType>();
+
+  Stream<bool> get isLoading => _isLoadingSubject.stream;
+  final _isLoadingSubject = BehaviorSubject<bool>(seedValue: false);
 
   var _articles = <Article>[];
 
@@ -34,8 +37,10 @@ class NewsBloc {
   }
 
   void _getArticles(List<int> ids) {
+    _isLoadingSubject.add(true);
     _updateArticles(ids).then((_) {
       _articlesSubject.add(UnmodifiableListView(_articles));
+      _isLoadingSubject.add(false);
     });
   }
 
