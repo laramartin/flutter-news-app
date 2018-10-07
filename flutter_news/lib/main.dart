@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_news/json_parser.dart';
+import 'package:flutter_news/src/json_parser.dart';
 import 'package:flutter_news/src/article.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';

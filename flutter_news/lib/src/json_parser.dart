@@ -1,6 +1,6 @@
 import 'package:flutter_news/src/article.dart';
 import 'dart:convert' as parser;
-import 'serializers.dart';
+import 'package:flutter_news/src/serializers.dart';
 
 List<int> parseTopStories(String json) {
   final parsed = parser.jsonDecode(json);
