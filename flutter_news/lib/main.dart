@@ -54,6 +54,26 @@ class _MyHomePageState extends State<MyHomePage> {
               children: snapshot.data.map(_buildItem).toList(),
             ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        items: [
+          BottomNavigationBarItem(
+            title: Text("Top stories"),
+            icon: Icon(Icons.trending_up),
+          ),
+          BottomNavigationBarItem(
+            title: Text("New stories"),
+            icon: Icon(Icons.new_releases),
+          )
+        ],
+        onTap: (index) {
+          if (index == 0) {
+            widget.bloc.storiesType.add(StoriesType.topStories);
+          } else if (index == 1) {
+            widget.bloc.storiesType.add(StoriesType.newStories);
+          }
+        },
+      ),
     );
   }
 
